@@ -1,8 +1,8 @@
 <template>
   <div>
-    <router-link :to="{ name:'student-add' }" class="btn btn-primary">Add</router-link>
+    <router-link :to="{ name:'student-add' }" class="btn btn-primary mb-3 mt-4">Add</router-link>
     <h1>List</h1>
-    <table class="table">
+    <table class="table table-border">
       <thead>
         <tr>
           <th scope="col">STT</th>
@@ -23,6 +23,7 @@
           <td>
             <button @click="handleDelete(item.id)" class="btn btn-danger">Delete</button>
             <router-link :to="`/students/edit/${item.id}`" class="btn btn-warning">Edit</router-link>
+             <router-link :to="`/students/detail/${item.id}`" class="btn btn-info">Detail</router-link>
           </td>
         </tr>
 
