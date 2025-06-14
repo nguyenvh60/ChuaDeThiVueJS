@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link :to="{ name:'student-add' }" class="btn btn-primary">Add</router-link>
     <h1>List</h1>
     <table class="table">
       <thead>
@@ -19,7 +20,10 @@
           <td>{{ item.age }}</td>
           <td>{{ item.email }}</td>
           <td><img :src="item.image"></td>
-          <td><button @click="handleDelete(item.id)" class="btn btn-danger">Delete</button></td>
+          <td>
+            <button @click="handleDelete(item.id)" class="btn btn-danger">Delete</button>
+            <router-link :to="`/students/edit/${item.id}`" class="btn btn-warning">Edit</router-link>
+          </td>
         </tr>
 
       </tbody>
