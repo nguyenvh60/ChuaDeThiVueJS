@@ -1,23 +1,34 @@
 <template>
     <div>
-        <h1>Edit</h1>
-        <form @submit.prevent="handleSubmit()">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" v-model="student.name">
+<h1>Cập nhật</h1>
+<form @submit.prevent="handleSubmit()">
+
+                  <div class="mb-3">
+                <label for="title" class="form-label">Tên danh mục</label>
+                <input type="text" class="form-control" id="title" v-model="category.title" />
             </div>
-            <div class="form-group">
-                <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" name="age" v-model="student.age">
+            <div class="mb-3">
+                <label for="count" class="form-label">Số lượng</label>
+                <input type="number" class="form-control" id="title" v-model="category.count" />
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" v-model="student.email">
+            <div class="mb-3">
+                <label class="form-label">Trạng thái</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="isAcitve" id="active" v-model="category.isActive"
+                        :value="true" />
+                    <label class="form-check-label" for="active"> Kích hoạt </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="isActive" id="notActive"
+                        v-model="category.isActive" :value="false" />
+                    <label class="form-check-label" for="notActive"> Ẩn </label>
+                </div>
+                <div class="mb-3">
+                    <label for="imageURL" class="form-label">Hình ảnh</label>
+                    <input type="text" class="form-control" id="imageURL" v-model="category.imageURL" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="image">Image</label>
-                <input type="text" class="form-control" id="image" name="image" v-model="student.image">
-            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
@@ -27,43 +38,41 @@
 import { ref, onMounted } from 'vue'
 import instanceAxios from '../utils/configAxios'
 import router from '../router/index'
-import { useRoute } from 'vue-router';
-
+import { useRoute } from 'vue-router'
 const route = useRoute();
-const id = route.params.id;
-const student = ref({
+const id = route.params.id
+const category = ref({
     name: '',
-    age: null,
-    email: '',
-    image: '',
+    price: null,
+    isActive: null,
+    imageURL: '',
+    category: ''
 })
 
-const handleSubmit = async () => {
+const handleSubmit = async()=>{
     try {
-        await instanceAxios.put(`/students/${id}`, student.value)
-        alert("Update Complete")
-        router.push('/students')
+        await instanceAxios.put(`/categories/${id}` , category.value)
+        alert ("Complete")
+        router.push(`/categories`)
     } catch (error) {
         console.log(error)
     }
 }
 
-const getStudentById = async () => {
+const getCategotyById = async()=>{
     try {
-        const res = await instanceAxios.get(`/students/${id}`)
-        student.value = res.data
+        const res = await instanceAxios.get(`/categories/${id}`)
+        category.value = res.data
     } catch (error) {
         console.log(error)
     }
 }
 
-onMounted(() => {
-    getStudentById();
+onMounted (()=>{
+    getCategotyById()
 })
-
-
-
-
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
